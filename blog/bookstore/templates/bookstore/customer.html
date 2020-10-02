@@ -1,0 +1,92 @@
+{% extends 'bookstore/main.html'%}
+
+{% block content %}
+
+<h1 class="p-5">Customer</h1>
+
+
+
+
+<div class="container pb-5">
+  <div class="row">
+    <div class="col-sm">
+    <a href="{% url 'create' customer.id %}"> Create Order</a>  
+    </div>
+    
+  </div>
+</div>
+
+<hr>
+
+<div class="container pb-5">
+  <div class="row">
+    <div class="col-sm">
+    <form class="form-inline my-2 my-lg-0" method="GET">
+     {{myFilter.form}}
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+    
+  </div>
+</div>
+
+<hr>
+
+
+
+
+
+<div class="container pb-5">
+  <div class="row">
+    <div class="col-sm">
+    Full name:   {{customer.name}}
+    </div>
+    <div class="col-sm">
+    Email:   {{customer.email}}
+    </div>
+    <div class="col-sm">
+    Age :   {{customer.age}}
+    </div>
+    <div class="col-sm">
+    Phone :   {{customer.phone}}
+    </div>
+      <div class="col-sm">
+    Number of Orders :   {{number_orders}}
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+<table class="table">
+  <thead class="thead-dark">
+    <tr> 
+      <th scope="col">Book</th>
+      <th scope="col">Category</th>
+      <th scope="col">Date</th>
+       <th scope="col">status</th>
+       <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for item in orders  %}
+        <tr>
+         <td>{{item.book}}</td>
+      <td>{{item.book.category}}</td>
+      <td>{{item.date_created}}</td>
+      <td>{{item.status}}</td>
+       <td>
+       <a href="{% url 'update' item.id%}"><i class="fas fa-edit"></i></a>
+       <a class="text-danger" href="{% url 'delete' item.id %}"><i class="fas fa-trash-alt"></i></a>
+       </td>
+       </tr>  
+      {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+ 
+
+
+{% endblock %}
